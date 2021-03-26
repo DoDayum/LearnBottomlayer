@@ -33,7 +33,7 @@ public class myAdvie {
         String method = pjp.getSignature().getName();//获取方法名
         Object[] array = pjp.getArgs();//获取方法参数
         ObjectMapper objectMapper = new ObjectMapper();
-        logger.info(String.format("调用前: %s: %s: 参数: %s", className, method, objectMapper.writeValueAsString(array)));
+        logger.info(String.format(" 调用前: %s: %s: 参数: %s", className, method, objectMapper.writeValueAsString(array)));
         Object obj = pjp.proceed();
         logger.info(String.format("调用后: %s: %s: 返回值: %s", className, method, objectMapper.writeValueAsString(obj)));
         return obj;
