@@ -38,16 +38,16 @@ public class Producer {
             SendResult result = producer.send(msg, new MessageQueueSelector() {
                 /**
                  *
-                 * @param mqs 队列集合
+                 * @param list 队列集合
                  * @param msg 消息对象
                  * @param arg 参数
                  * @return MessageQueue
                  */
                 @Override
-                public MessageQueue select(List<MessageQueue> mqs, Message msg, Object arg) {
+                public MessageQueue select(List<MessageQueue> list, Message msg, Object arg) {
                     long orderId = (long) arg;
-                    long index = orderId % mqs.size();
-                    return mqs.get(Math.toIntExact(index));
+                    long index = orderId % list.size();
+                    return list.get(Math.toIntExact(index));
                 }
             }, orderSteps.get(i).getOrderId());
 
@@ -55,7 +55,7 @@ public class Producer {
         }
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String time = dateFormat.format(new Date());
-        System.out.println("生产完毕,时间\t"+time);
+        System.out.println("生产完毕,时间\t" + time);
         producer.shutdown();
         System.out.println("发送者已关闭");
 
